@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 set -eo pipefail; [[ $DOKKU_TRACE ]] && set -x
 
-RETHINKDB_IMAGE=rethinkdb:1.16.3
+RETHINKDB_IMAGE=rethinkdb
 
 PENDING_DIR="$DOKKU_ROOT/.rethinkdb/pending-volumes"
 
@@ -214,7 +214,7 @@ EOF
         done < $BIND_FILE
     fi
 
-    VOLUME="$VOLUME_DIR:/rethinkdb"
+    VOLUME="$VOLUME_DIR:/data"
 
     docker run -v $VOLUME --name=$CONTAINER_NAME \
         ${PORTS[@]} -d $RETHINKDB_IMAGE
